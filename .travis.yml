@@ -6,10 +6,15 @@ addons:
     organization: "saschawiegleb"
     token:
       secure: "$SONAR_TOKEN"
+before_script:
+  - chmod +x gradlew
 script:
   - ./gradlew assemble
   - ./gradlew check
-  - ./gradlew sonarqube
+#  - ./gradlew sonarqube
+#  - ./gradlew codeCoverageReport
+after_success:
+#  - bash <(curl -s https://codecov.io/bash)
 
 cache:
   directories:

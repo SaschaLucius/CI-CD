@@ -35,21 +35,6 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
 }
 
-task codeCoverageReport(type: JacocoReport) {
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-
-    subprojects.each {
-        sourceSets it.sourceSets.main
-    }
-
-    reports {
-        xml.enabled true
-        xml.destination "${buildDir}/reports/jacoco/report.xml"
-        html.enabled false
-        csv.enabled false
-    }
-}
-
 application {
     // Define the main class for the application
     mainClassName = "saschawiegleb.App"
