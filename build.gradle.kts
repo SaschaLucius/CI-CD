@@ -41,6 +41,7 @@ tasks {
     val codeCoverageReport by creating(JacocoReport::class) {
         executionData(fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec"))
 
+        // Add all relevant sourcesets from the subprojects
         subprojects.onEach {
             sourceSets(it.sourceSets["main"])
         }
@@ -52,6 +53,6 @@ tasks {
             csv.isEnabled = false
         }
 
-        dependsOn("test")
+        dependsOn("check")
     }
 }
