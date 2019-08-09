@@ -1,0 +1,19 @@
+language: java
+jdk: oraclejdk9
+dist: trusty
+addons:
+  sonarcloud:
+    organization: "saschawiegleb"
+    token:
+      secure: "$SONAR_TOKEN"
+script:
+  - ./gradlew assemble
+  - ./gradlew check
+  - ./gradlew sonarqube
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+    - '$HOME/.gradle'
+    - '.gradle'

@@ -12,6 +12,8 @@ plugins {
 
     // Apply the application plugin to add support for building a CLI application
     application
+
+    id("org.sonarqube") version "2.7"
 }
 
 repositories {
