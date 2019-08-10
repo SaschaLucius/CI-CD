@@ -8,4 +8,3 @@
  */
 
 rootProject.name = "CI-CD"
-//sonar.projectKey = "SaschaWiegleb_CI-CD"
