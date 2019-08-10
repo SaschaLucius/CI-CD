@@ -59,3 +59,10 @@ tasks {
         dependsOn("test")
     }
 }
+
+sonarqube {
+    properties {
+        property("sonar.projectName", "CI-CD")
+        property("sonar.projectKey", "SaschaWiegleb_CI-CD")
+    }
+}
