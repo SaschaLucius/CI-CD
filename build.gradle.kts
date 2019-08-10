@@ -1,5 +1,4 @@
 plugins {
-    // Apply the java plugin to add support for Java
     java
 
     // Apply the application plugin to add support for building a CLI application
@@ -8,6 +7,8 @@ plugins {
     jacoco
 
     id("org.sonarqube") version "2.7"
+
+    eclipse
 }
 
 repositories {
@@ -32,12 +33,12 @@ application {
     mainClassName = "saschawiegleb.App"
 }
 
-val test by tasks.getting(Test::class) {
-    // Use junit platform for unit tests
-    useJUnitPlatform()
-}
-
 tasks {
+    "test"(Test::class) {
+        // Use junit platform for unit tests
+        useJUnitPlatform()
+    }
+
     val codeCoverageReport by creating(JacocoReport::class) {
         executionData(fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec"))
 
@@ -47,12 +48,14 @@ tasks {
         }
 
         reports {
+            sourceDirectories.setFrom(files(sourceSets["main"].allSource.srcDirs))
+            classDirectories.setFrom(files(sourceSets["main"].output))
             xml.isEnabled = true
             xml.destination = File("$buildDir/reports/jacoco/report.xml")
             html.isEnabled = false
             csv.isEnabled = false
         }
 
-        dependsOn("check")
+        dependsOn("test")
     }
 }
